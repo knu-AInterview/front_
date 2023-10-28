@@ -26,19 +26,52 @@ function Page1() {
     setRequirement(e.target.value);
   };
 
-  const handleLevelChange = (e) => {
-    setLevel(e.target.value);
-  };
+  // 다음 페이지 ( /page2 로 데이터를 넘김. )
+  // const handleNext = () => {
+  //   // 이후 작업 수행 및 데이터 전달
+  //   const dataToSend = {job, requirement, level};
+  //   navigate('/page2', { state: { data: dataToSend } });
+  // };
+
+  // const handleNext = () => {
+  //   // 데이터를 객체로 만들기
+  //   const dataToSend = {
+  //     job: job,
+  //     requirement: requirement,
+  //     level: level,
+  //   };
+
+  //   // 서버로 데이터 보내기
+  //   fetch("/api/saveData", {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify(dataToSend),
+  //   })
+  //     .then((response) => response.json())
+  //     .then((result) => {
+  //       console.log("데이터가 서버에 전송되었습니다.");
+  //       // 이후 페이지 전환 또는 다른 작업 수행
+  //     })
+  //     .catch((error) => {
+  //       console.error("데이터 전송 중 오류가 발생했습니다:", error);
+  //     });
+  // };
+  // };
 
   const handleNext = () => {
-    // Create an object with the data
+    // 데이터를 객체로 만들기
     const dataToSend = {
       job: job,
       requirement: requirement,
       level: level,
     };
 
-    // Send data to the server
+    console.log(typeof job);
+    console.log(typeof requirement);
+    console.log(typeof level);
+    // 서버로 데이터 보내기
     axios
       .post("/api/saveData", dataToSend, {
         headers: {
@@ -46,11 +79,11 @@ function Page1() {
         },
       })
       .then((response) => {
-        console.log("Data has been sent to the server.");
-        // Perform page navigation or other tasks after successful data submission
+        console.log("데이터가 서버에 전송되었습니다.");
+        // 이후 페이지 전환 또는 다른 작업 수행
       })
       .catch((error) => {
-        console.error("An error occurred during data transmission:", error);
+        console.error("데이터 전송 중 오류가 발생했습니다:", error);
       });
   };
 

@@ -42,19 +42,19 @@
 
 // export default Example;
 
-import React, { useState } from 'react';
-import { Button, ButtonGroup } from 'reactstrap';
+import React, { useState } from "react";
+import { Button, ButtonGroup } from "reactstrap";
 
-function Example({selectedDifficulty, setSelectedDifficulty }) {
+function Example({ level, setlevel }) {
   const [cSelected, setCSelected] = useState([]);
   const [rSelected, setRSelected] = useState(null);
   const difficultyLevelToText = {
-    1: 'Hard',
-    2: 'Medium',
-    3: 'Easy',
-  }
+    1: "Hard",
+    2: "Medium",
+    3: "Easy",
+  };
   const onDifficultyBtnClick = (selected) => {
-    setSelectedDifficulty(selected); // 선택한 값을 상태로 업데이트
+    setlevel(selected); // 선택한 값을 상태로 업데이트
   };
   return (
     <div>
@@ -64,7 +64,7 @@ function Example({selectedDifficulty, setSelectedDifficulty }) {
           color="primary"
           outline
           onClick={() => onDifficultyBtnClick(1)}
-          active={selectedDifficulty === 1}
+          active={level === 1}
         >
           Hard
         </Button>
@@ -72,7 +72,7 @@ function Example({selectedDifficulty, setSelectedDifficulty }) {
           color="primary"
           outline
           onClick={() => onDifficultyBtnClick(2)}
-          active={selectedDifficulty === 2}
+          active={level === 2}
         >
           Medium
         </Button>
@@ -80,12 +80,12 @@ function Example({selectedDifficulty, setSelectedDifficulty }) {
           color="primary"
           outline
           onClick={() => onDifficultyBtnClick(3)}
-          active={selectedDifficulty === 3}
+          active={level === 3}
         >
           Easy
         </Button>
       </ButtonGroup>
-      <p>Selected: {difficultyLevelToText[selectedDifficulty]}</p>
+      <p>Selected: {difficultyLevelToText[level]}</p>
     </div>
   );
 }
