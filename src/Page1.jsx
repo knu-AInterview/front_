@@ -17,6 +17,7 @@ function Page1() {
   const [job, setJob] = useState("");
   const [requirement, setRequirement] = useState("");
   const [level, setlevel] = useState(null); // Example 컴포넌트에서 선택한 난이도 상태
+  const [loading, setLoading] = useState(false);
 
   const handleJobChange = (e) => {
     setJob(e.target.value);
@@ -26,41 +27,9 @@ function Page1() {
     setRequirement(e.target.value);
   };
 
-  // 다음 페이지 ( /page2 로 데이터를 넘김. )
-  // const handleNext = () => {
-  //   // 이후 작업 수행 및 데이터 전달
-  //   const dataToSend = {job, requirement, level};
-  //   navigate('/page2', { state: { data: dataToSend } });
-  // };
-
-  // const handleNext = () => {
-  //   // 데이터를 객체로 만들기
-  //   const dataToSend = {
-  //     job: job,
-  //     requirement: requirement,
-  //     level: level,
-  //   };
-
-  //   // 서버로 데이터 보내기
-  //   fetch("/api/saveData", {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //     body: JSON.stringify(dataToSend),
-  //   })
-  //     .then((response) => response.json())
-  //     .then((result) => {
-  //       console.log("데이터가 서버에 전송되었습니다.");
-  //       // 이후 페이지 전환 또는 다른 작업 수행
-  //     })
-  //     .catch((error) => {
-  //       console.error("데이터 전송 중 오류가 발생했습니다:", error);
-  //     });
-  // };
-  // };
-
   const handleNext = () => {
+    setLoading(true); // 요청 시작 시 로딩 상태 활성화
+
     // 데이터를 객체로 만들기
     const dataToSend = {
       job: job,
@@ -79,8 +48,10 @@ function Page1() {
         },
       })
       .then((response) => {
+        setLoading(false); // 로딩 상태 비활성화
         console.log("데이터가 서버에 전송되었습니다.");
         // 이후 페이지 전환 또는 다른 작업 수행
+        navigate("/page2", { state: response.data }); // 데이터와 함께 페이지 전환
       })
       .catch((error) => {
         console.error("데이터 전송 중 오류가 발생했습니다:", error);

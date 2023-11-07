@@ -9,24 +9,15 @@ function Page2() {
   const receivedData = location.state?.data;
   const [data, setData] = useState([]);
   const [toggledIndices, setToggledIndices] = useState([]);
-  console.log(receivedData);
+  console.log(receivedData);  
+  setData(receivedData);
+  setToggledIndices(new Array(data.length).fill(false));
 
   const handleGoBack = () => {
     navigate(-1, { state: { data: receivedData } });
   };
 
-  useEffect(() => {
-    axios
-      .get("/data.json")
-      .then((response) => {
-        setData(response.data);
-        setToggledIndices(new Array(response.data.length).fill(false));
-      })
-      .catch((error) => {
-        console.error("Error fetching data:", error);
-      });
-  }, []);
-
+  
   const toggleVisibility = (index) => {
     setToggledIndices((prevToggledIndices) => {
       const newToggledIndices = [...prevToggledIndices];
